@@ -10,8 +10,8 @@ class PizzaController extends Controller
 
   public function index() {
     // get data from a database
-    // $pizzas = Pizza::all();
-    $pizzas = Pizza::orderBy('name','desc')->get();
+    $pizzas = Pizza::all();
+    // $pizzas = Pizza::orderBy('name','desc')->get();
     // $pizzas = Pizza::where('type','volcano')->get();
     // $pizzas = Pizza::latest()->get();
 
@@ -52,4 +52,10 @@ class PizzaController extends Controller
     return redirect('/')->with('mssg','Thank you for your order! Have a nice Day');
   }
 
+  public function destroy($id) {
+    // use the $id variable to query the db for a record
+    $pizzas = Pizza::findorFail($id);
+    $pizzas->delete();
+    return redirect('/pizzas');
+  }
 }
